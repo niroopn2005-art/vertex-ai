@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" fill="#0A0F1C" rx="6"/>
+  <!-- Outer V shape - electric blue -->
+  <polyline points="4,6 16,26 28,6" fill="none" stroke="#00BFFF" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Inner V detail - slightly offset -->
+  <polyline points="9,6 16,19 23,6" fill="none" stroke="#00BFFF" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" opacity="0.6"/>
+  <!-- Neural nodes - neon green -->
+  <circle cx="4" cy="6" r="2" fill="#39FF14"/>
+  <circle cx="28" cy="6" r="2" fill="#39FF14"/>
+  <circle cx="16" cy="26" r="2.5" fill="#39FF14"/>
+  <circle cx="16" cy="19" r="1.5" fill="#00BFFF"/>
+  <!-- Glow effect -->
+  <polyline points="4,6 16,26 28,6" fill="none" stroke="#00BFFF" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" opacity="0.1"/>
+</svg>
