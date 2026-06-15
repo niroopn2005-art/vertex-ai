@@ -1,0 +1,29 @@
+{
+  "mcp": {
+    "servers": {
+      "filesystem": {
+        "command": "npx",
+        "args": [
+          "-y",
+          "@modelcontextprotocol/server-filesystem",
+          "/Users/niroop/.gemini/antigravity/scratch/openclaw"
+        ]
+      },
+      "weather-service": {
+        "command": "python3",
+        "args": [
+          "examples/python/mcp_weather_server.py"
+        ],
+        "env": {
+          "PYTHONUNBUFFERED": "1"
+        }
+      },
+      "memory-store": {
+        "command": "node",
+        "args": [
+          "dist/mcp-memory-server.js"
+        ]
+      }
+    }
+  }
+}

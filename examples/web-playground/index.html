@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw Web Playground</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-icon">⬡</span>
+        <h1>OpenClaw <span class="badge">Playground</span></h1>
+      </div>
+      <p class="subtitle">Direct browser-to-gateway WebSocket test client</p>
+    </header>
+
+    <div class="main-layout">
+      <!-- Left Column: Controls & Connection -->
+      <aside class="sidebar">
+        <section class="card connection-panel">
+          <h2>Connection Settings</h2>
+          <div class="form-group">
+            <label for="host">Gateway Host</label>
+            <input type="text" id="host" value="127.0.0.1" placeholder="127.0.0.1">
+          </div>
+          <div class="form-group">
+            <label for="port">Gateway Port</label>
+            <input type="number" id="port" value="18789" placeholder="18789">
+          </div>
+          <div class="form-group">
+            <label for="token">Gateway Token</label>
+            <input type="password" id="token" placeholder="Optional Auth Token">
+          </div>
+          <div class="form-group">
+            <label for="session-key">Session Key</label>
+            <input type="text" id="session-key" value="global" placeholder="global">
+          </div>
+          <button id="connect-btn" class="btn btn-primary">Connect Gateway</button>
+          <div class="connection-status" id="connection-status">
+            <span class="status-indicator disconnected"></span>
+            <span class="status-text">Disconnected</span>
+          </div>
+          <div class="helper-links">
+            Ensure your local gateway is running at <a href="http://localhost:18789" target="_blank">http://localhost:18789</a>
+          </div>
+        </section>
+
+        <!-- System Stats / Session Info -->
+        <section class="card stats-panel">
+          <h2>Session Info</h2>
+          <div class="stat-row">
+            <span class="stat-label">Connection ID:</span>
+            <span id="conn-id" class="stat-value">-</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Server Version:</span>
+            <span id="server-version" class="stat-value">-</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Active Protocol:</span>
+            <span id="protocol-ver" class="stat-value">-</span>
+          </div>
+        </section>
+      </aside>
+
+      <!-- Center Column: Chat Client -->
+      <main class="chat-area">
+        <div class="card chat-card">
+          <div class="chat-messages" id="chat-messages">
+            <div class="system-message">
+              Connect to the gateway using the connection settings on the left to start prompting.
+            </div>
+          </div>
+          
+          <div class="chat-input-area">
+            <textarea id="chat-input" placeholder="Type a message to prompt the agent..." disabled></textarea>
+            <button id="send-btn" class="btn btn-send" disabled>
+              <span class="send-icon">▲</span>
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Column: Protocol Frame Logger -->
+      <aside class="logger-panel">
+        <div class="card logger-card">
+          <div class="logger-header">
+            <h2>Frame Logger (JSON-RPC)</h2>
+            <button id="clear-logger-btn" class="btn btn-secondary btn-sm">Clear</button>
+          </div>
+          <div class="log-entries" id="log-entries">
+            <div class="log-placeholder">Frames sent and received over the WebSocket connection will appear here in real-time...</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

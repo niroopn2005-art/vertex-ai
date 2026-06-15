@@ -1,0 +1,55 @@
+{
+  "agents": {
+    "defaults": {
+      "model": "anthropic/claude-3-5-sonnet",
+      "workspace": "~/.openclaw/workspace",
+      "sandbox": {
+        "mode": "non-main",
+        "image": "python:3.11-slim"
+      }
+    },
+    "profiles": {
+      "coding-assistant": {
+        "model": "openai/gpt-4o",
+        "systemPrompt": "You are a professional software engineer. Focus on writing clean, modular code.",
+        "skills": [
+          "coding-agent"
+        ]
+      },
+      "support-bot": {
+        "model": "google/gemini-2.0-flash",
+        "systemPrompt": "You are a polite customer support agent. Help answer user questions based on the documentation.",
+        "skills": [
+          "healthcheck",
+          "summarize"
+        ]
+      }
+    },
+    "routing": {
+      "channels": {
+        "slack": {
+          "agent": "coding-assistant"
+        },
+        "telegram": {
+          "agent": "support-bot"
+        }
+      }
+    }
+  },
+  "models": {
+    "providers": {
+      "anthropic": {
+        "apiKey": "YOUR_ANTHROPIC_API_KEY"
+      },
+      "openai": {
+        "apiKey": "YOUR_OPENAI_API_KEY"
+      },
+      "google": {
+        "apiKey": "YOUR_GEMINI_API_KEY"
+      },
+      "ollama": {
+        "host": "http://127.0.0.1:11434"
+      }
+    }
+  }
+}

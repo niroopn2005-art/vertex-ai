@@ -1,0 +1,56 @@
+services:
+  openclaw-gateway:
+    image: openclaw:local
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    environment:
+      HOME: /home/node
+      OPENCLAW_HOME: /home/node
+      OPENCLAW_STATE_DIR: /home/node/.openclaw
+      OPENCLAW_CONFIG_PATH: /home/node/.openclaw/openclaw.json
+      OPENCLAW_CONFIG_DIR: /home/node/.openclaw
+      OPENCLAW_WORKSPACE_DIR: /home/node/.openclaw/workspace
+      OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN:-dev-local-secret-token}
+      # Tell OpenClaw how to reach the ollama service container
+      OLLAMA_HOST: http://ollama:11434
+    volumes:
+      - openclaw-data:/home/node/.openclaw
+    ports:
+      - "18789:18789"
+    restart: unless-stopped
+    depends_on:
+      - ollama
+    command:
+      [
+        "node",
+        "dist/index.js",
+        "gateway",
+        "--bind",
+        "lan",
+        "--port",
+        "18789"
+      ]
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: openclaw-ollama
+    volumes:
+      - ollama-models:/root/.ollama
+    ports:
+      - "11434:11434"
+    restart: unless-stopped
+    # Use GPU support if available (Optional, uncomment if NVIDIA drivers are configured)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+volumes:
+  openclaw-data:
+    driver: local
+  ollama-models:
+    driver: local
